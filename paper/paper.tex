@@ -1,130 +1,164 @@
-% O tipo de documento e as opções de formatação da página
 \documentclass[twocolumn,A4]{article}
 
-% Pacotes que vamos utilizar (esses estão em quase todos os documentos)
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Para poder usar caracteres especiais e acentos
-\usepackage[utf8]{inputenc}
+% Fontes (XeLaTeX/LuaLaTeX/Tectonic)
 \usepackage{fontspec}
-
+% Se paper.tex está em paper/ e fonts/ na raiz do repo:
 \setmainfont[
   Path = ../fonts/,
   Extension = .ttf,
   UprightFont = Gilroy-Light,
   BoldFont = Gilroy-Bold,
-  BoldItalicFont = Gilroy-BoldItalic,
-  ItalicFont = Gilroy-MediumItalic % (você tem esse arquivo; melhor do que ThinItalic como itálico padrão)
+  ItalicFont = Gilroy-MediumItalic,
+  BoldItalicFont = Gilroy-BoldItalic
 ]{Gilroy}
-% Lingua utilizada para o documento
-%\usepackage[english]{babel}
+
 \usepackage[brazil]{babel}
-% Para mais funções de matemática
 \usepackage{amsmath}
 \usepackage{amssymb}
-% Para inserir figuras
 \usepackage{graphicx}
-% Para colocar links e metadados no PDF
-\usepackage{hyperref}
-% Para melhorar a distribuição de texto
 \usepackage{microtype}
-% Para citações
-\usepackage[round,authoryear,sort]{natbib}
+\usepackage{placeins}
 
-% Configurações de formato do documento (chama funções dos pacotes acima)
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Configura os metadados do PDF
-\hypersetup{
-    % Links coloridos ao invés da caixa colorida
-    colorlinks,
-    % Cor dos links
-    allcolors=blue,
-    % Título que aparece nos metadados
-    pdftitle={Mudança na temperatura média de países nos últimos cinco anos},
-    % Autor que aparece nos metadados
-    pdfauthor={Leonardo Uieda, Yago M. Castro, Arthur S. Macêdo},
-    % Permite quebrar a linha no meio de links
-    breaklinks=true,
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+% Aumenta o espaço reservado para rodapé
+\setlength{\footskip}{30pt}
+
+% Rodapé pequeno e multilinha à esquerda
+\fancyfoot[L]{%
+\scriptsize
+Fonte dos dados: Berkeley Earth (CC-BY-NC).
+Processamento: Python + NumPy + Pandas.
+Workflow: GNU Make + Tectonic.
+IAG-USP (2026).
 }
 
-% Incluir as variáveis geradas pelo cógido
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Numeração pequena à direita
+\fancyfoot[R]{\scriptsize \thepage/\pageref{LastPage}}
+
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0.3pt}
+
+
+
+% Citações
+\usepackage[round,authoryear,sort]{natbib}
+
+% Hyperlinks (carregar por último para evitar conflitos e garantir links em citações)
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  allcolors=blue,
+  breaklinks=true,
+  pdftitle={Mudança na temperatura média de países nos últimos cinco anos},
+  pdfauthor={Iago Guilherme}
+}
+
+% Variáveis geradas pelo código
 \input{variaveis/n_paises.tex}
+\input{variaveis/paises_extremos.tex}
 \input{variaveis/paises.tex}
 
 
-% Começa o documento em si
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{document}
 
 \title{Mudança na temperatura média de países nos últimos cinco anos}
-\author{
-    Leonardo Uieda\textsuperscript{1,2},
-    Yago M. Castro\textsuperscript{1,2},
-    Arthur S. Macêdo\textsuperscript{1,2}
-    \\[0.2cm]
-    {\small
-        \textsuperscript{1}Computer-Oriented Geoscience Lab;
-        \textsuperscript{2}Universidade de São Paulo, Brasil
-    }
-}
-\date{\today}
 
+\author{
+  Iago Guilherme\textsuperscript{1}\thanks{\href{https://github.com/IagoGuilherme}{github.com/IagoGuilherme}}
+  \\[0.15cm]
+  {\small \textsuperscript{1}Instituto de Astronomia, Geofísica e Ciências Atmosféricas (IAG-USP), Brasil}
+  \\[0.25cm]
+  {\small \textbf{Instrutor:} \href{https://github.com/leouieda}{Leonardo Uieda}}
+  \\[-0.05cm]
+  {\small \textbf{Monitores:} \href{https://github.com/arthursmacedo}{Arthur Siqueira de Macêdo}, \href{https://github.com/YagoMCastro}{Yago Moreira Castro}}
+}
+
+\date{\today}
 \maketitle
 
 \begin{abstract}
-Mudanças climáticas estão afetando o mundo todo.
-Dados de temperatura na superfície da Terra são fundamentais para entendermos como este fenômeno impacta diferentes lugares do mundo.
-Analisamos séries temperais de temperatura média mensal de \NPaises{} países.
-Com essa análise, determinados quais são os países com maior variação de
-temperatura nos últimos cinco anos.
+\textbf{Mini Abstract (English).}
+This study analyzes recent variations in mean monthly surface temperature for \NPaises{} countries.
+A linear model is fitted to the last five years of observations to estimate the annual temperature change rate for each country.
+The results highlight regional differences in recent trends and enable quantitative comparisons among countries.
 \end{abstract}
 
 \section{Introdução}
 
-Sabemos que a temperatura média da Terra tem aumentado durante o Holoceno, com
-as mudanças mais recentes sendo consideradas anômalas \citet{Osman2021}.
+A variabilidade da temperatura média global constitui um dos principais indicadores das mudanças climáticas em curso. Registros paleoclimáticos e instrumentais indicam que a temperatura média da Terra tem apresentado tendência de aumento ao longo do Holoceno, com intensificação nas últimas décadas \citep{Osman2021}. Entretanto, apesar da tendência global de aquecimento, a distribuição espacial dessas variações não é uniforme, refletindo a influência combinada de forçantes radiativas, variabilidade atmosférica regional e processos oceânicos.
+
+Análises em escala nacional permitem identificar padrões regionais e contrastes espaciais relevantes. Embora estudos de longo prazo sejam fundamentais para compreender tendências climáticas estruturais, investigações em janelas temporais mais curtas — como os últimos cinco anos — podem revelar variações recentes associadas a eventos extremos, oscilações climáticas e padrões atmosféricos transientes.
+
+Neste trabalho, investigamos a variação recente da temperatura média mensal em diferentes países, ajustando um modelo linear às séries temporais correspondentes ao período mais recente disponível. O objetivo é quantificar e comparar as taxas anuais de variação entre países, destacando contrastes regionais e padrões espaciais emergentes.
 
 \section{Metodologia}
 
-Seja a taxa variação de temperatura $\alpha$ em graus Celsius por ano,
-assumimos uma variação linear da temperatura $T$ com o tempo $t$,
+Seja a taxa de variação da temperatura $\alpha$, medida em graus Celsius por ano. Assumimos que, em escala temporal recente, a evolução da temperatura média $T$ pode ser aproximada por um modelo linear em função do tempo $t$:
 
 \begin{equation}
-    T(t) = t \alpha + \beta
-    \label{eq:linear}
+  T(t) = t\alpha + \beta
+  \label{eq:linear}
 \end{equation}
 
 \noindent
-em que $\beta$ é o coeficiente linear da reta.
-Podemos ajustar a equação \ref{eq:linear} aos dados dos últimos cinco anos
-e calcular a taxa de variação $\alpha$.
+em que $\beta$ representa o coeficiente linear do modelo. A equação \ref{eq:linear} foi ajustada às séries temporais correspondentes aos últimos cinco anos para cada país, permitindo a estimativa da taxa de variação $\alpha$.
 
 \section{Resultados}
 
-Analisamos os dados de \NPaises{} países: \Paises{}.
+Os maiores valores estimados ocorreram em \PaisesMaiores{}, enquanto os menores ocorreram em \PaisesMenores{}.
+Foram analisadas séries temporais de temperatura média mensal para \NPaises{} países, estimando-se a taxa anual de variação ($\alpha$) a partir dos últimos cinco anos de dados.
 
+Os maiores valores estimados ocorreram em \PaisesMaiores{}, enquanto os menores ocorreram em \PaisesMenores{} (Figura~\ref{fig:variacao}). A distribuição espacial das taxas é mostrada na Figura~\ref{fig:mapa_variacao}.
+
+
+% Figura 1: barras (mantém no fluxo)
 \begin{figure}[htb]
-    \centering
-    \includegraphics[width=\linewidth]{../figuras/taxas_variacao.png}
-    \caption{
-        Cinco maiores e menores taxas de variação no nosso conjunto de dados.
-    }
-    \label{fig:variacao}
+  \centering
+  \includegraphics[width=\linewidth]{../figuras/taxas_variacao.png}
+  \caption{Cinco maiores e menores taxas de variação no conjunto de dados analisado.}
+  \label{fig:variacao}
 \end{figure}
 
-Os resultados estão na figura \ref{fig:variacao}.
+A Figura~\ref{fig:variacao} apresenta os cinco países com maiores taxas positivas e os cinco com menores taxas no período considerado.
+
+% Figura 2: mapa ocupando ~metade da página na vertical (altura controlada)
+% "height=0.5\textheight" força a imagem a ocupar metade da altura do texto.
+% "keepaspectratio" evita distorção.
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{../figuras/mapa_variacao.png}
+  \caption{Mapa mundial da taxa de variação de temperatura (°C/ano) estimada para os últimos cinco anos. Países sem dados ou sem correspondência no mapa estão em cinza.}
+  \label{fig:mapa_variacao}
+\end{figure*}
+
+\FloatBarrier
+
+
 
 \section{Conclusões}
 
-O mundo está pegando fogo e precisamos parar com a nossa dependência nos
-combustíveis fósseis.
+A análise realizada para \NPaises{} países indica predominância de tendências positivas na variação recente da temperatura média. A maior taxa estimada foi de \MaiorTaxa~°C/ano, enquanto a menor atingiu \MenorTaxa~°C/ano. A média global das taxas estimadas foi de aproximadamente \MediaTaxa~°C/ano.
 
+A distribuição espacial das estimativas revela heterogeneidade regional significativa. Embora o sinal médio global seja predominantemente positivo, indicando aquecimento recente em grande parte dos países analisados, observam-se também tendências negativas em determinadas regiões, possivelmente associadas à variabilidade climática interanual.
+
+Cabe ressaltar que o período analisado — correspondente aos últimos cinco anos — representa uma janela temporal relativamente curta para inferências climáticas estruturais. Ainda assim, as estimativas obtidas evidenciam que variações recentes podem apresentar magnitudes relevantes em escala anual.
+
+O workflow adotado, que integra aquisição automática de dados, processamento, geração de figuras e compilação do artigo, assegura reprodutibilidade computacional e permite a atualização imediata dos resultados com a incorporação de novos dados.
+
+
+\newpage
 \section*{Agradecimentos}
 
-Agradecemos a todas as pessoas que dedicaram seu tempo à criação dos softwares
-livres dos quais dependemos para a criação desse artigo.
+Este trabalho foi desenvolvido no contexto do Curso de Verão do IAG-USP (2026), sob orientação do Prof. \href{https://www.leouieda.com/}{Leonardo Uieda} (\href{https://github.com/leouieda}{GitHub}), com apoio dos monitores \href{https://github.com/arthursmacedo}{Arthur Siqueira de Macêdo} e \href{https://github.com/YagoMCastro}{Yago Moreira Castro}.
 
-\bibliographystyle{apalike}
+\bibliographystyle{plainnat}
 \bibliography{referencias}
 
 \end{document}

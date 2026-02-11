@@ -129,8 +129,8 @@ artigo do zero.
 
 ## 👤 Autor
 
-Iago Guilherme\
-Instituto de Astronomia, Geofísica e Ciências Atmosféricas (IAG-USP)
+| 👨‍💻 Projeto desenvolvido por | [Iago Guilherme](https://github.com/IagoGuilherme) |
+
 
 ## 👥 Informações do Curso
 

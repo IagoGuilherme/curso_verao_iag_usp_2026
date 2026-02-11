@@ -3,6 +3,23 @@
 
 #font
 fonts/
+img/
+dados/
+data/
+resultados/
+figuras/
+paper/variaveis/
+paper/*.aux
+paper/*.bbl
+paper/*.blg
+paper/*.log
+paper/*.out
+paper/*.bcf
+paper/*.run.xml
+paper/*.synctex.gz
+paper/paper.pdf
+
+
 
 
 # Python
