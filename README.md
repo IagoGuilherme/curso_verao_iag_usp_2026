@@ -1,4 +1,4 @@
-# 🌍🪨 Curso de Verão IAG-USP 2026 --- Projeto Reprodutível
+# 🌍🪨 Curso de Verão IAG-USP 2026 - Trabalho Final
 
 Projeto desenvolvido no contexto do **Curso de Verão do IAG-USP (2026)**
 com foco em organização, automação e reprodutibilidade de análises
