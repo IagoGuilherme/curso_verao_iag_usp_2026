@@ -147,11 +147,12 @@ Instituto de Astronomia, Geofísica e Ciências Atmosféricas — Universidade d
 
 ## 📌 DOI (Zenodo)
 
-Quando você criar o depósito no Zenodo e conectar ao GitHub, substitua o badge de DOI por um badge real, por exemplo:
+## 📖 How to Cite
 
-```md
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX)
-```
+If you use this project, please cite:
+
+Guilherme, I. (2026). *Curso de Verão IAG-USP 2026 — Reproducible Scientific Project* (v1.0). Zenodo. https://doi.org/10.5281/zenodo.18615451
+
 
 ---
 
@@ -162,11 +163,7 @@ Quando você criar o depósito no Zenodo e conectar ao GitHub, substitua o badge
 
 ---
 
-# 🇬🇧 English version
-
-<p align="center">
-  <img src="assets/mapa_variacao.png" alt="Global map of temperature change rate" width="900">
-</p>
+# 🇬🇧 English
 
 <p align="center">
   <img alt="Python" src="https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white">
@@ -205,13 +202,11 @@ Data → Processing → Results → Figures → LaTeX variables → PDF
   <img src="assets/mapa_variacao.gif" alt="Map GIF" width="900">
 </p>
 
-## DOI (Zenodo)
+## 📖 How to Cite
 
-Replace the DOI badge once you create a Zenodo release:
+If you use this project, please cite:
 
-```md
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX)
-```
+Guilherme, I. (2026). *Curso de Verão IAG-USP 2026 — Reproducible Scientific Project* (v1.0). Zenodo. https://doi.org/10.5281/zenodo.18615451
 
 ## License
 

@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+title: "Curso de Verão IAG-USP 2026 — Reproducible Scientific Project"
+version: "v1.0"
+doi: 10.5281/zenodo.18615451
+authors:
+  - family-names: Guilherme
+    given-names: Iago
+    orcid: ""
+date-released: 2026-02-11
+license: MIT
+repository-code: "https://github.com/IagoGuilherme/curso_verao_iag_usp_2026"
