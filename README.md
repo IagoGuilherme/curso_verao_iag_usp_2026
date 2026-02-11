@@ -103,21 +103,7 @@ make view
 
 ---
 
-## 🗺️ Mapa no README (PNG + GIF)
 
-Você pode destacar o mapa também como **GIF** (útil para apresentações/portfólio):
-
-<p align="center">
-  <img src="assets/mapa_variacao.gif" alt="Mapa (GIF) da variação de temperatura" width="900">
-</p>
-
-### Como gerar o GIF (opcional)
-Se você tiver `ImageMagick` instalado, por exemplo:
-
-```bash
-# instala (via Homebrew), se necessário: brew install imagemagick
-magick -delay 150 -loop 0 assets/mapa_variacao.png assets/mapa_variacao.gif
-```
 
 > Se você preferir um GIF animado “de verdade” (ex.: legenda mudando, zoom, etc.), dá para gerar via Python/Matplotlib também.
 
@@ -195,12 +181,6 @@ This repository (IAG-USP Summer Course 2026) demonstrates a **fully reproducible
 ```text
 Data → Processing → Results → Figures → LaTeX variables → PDF
 ```
-
-## Map GIF (optional)
-
-<p align="center">
-  <img src="assets/mapa_variacao.gif" alt="Map GIF" width="900">
-</p>
 
 ## 📖 How to Cite
 
