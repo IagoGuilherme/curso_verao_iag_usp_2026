@@ -1,48 +1,140 @@
-# Curso de Verão IAG-USP 2026 --- Projeto Reprodutível
+# 🌍🪨 Curso de Verão IAG-USP 2026 --- Projeto Reprodutível
 
-Projeto desenvolvido no contexto do Curso de Verão do IAG-USP (2026)
-para demonstrar um workflow reprodutível: download de dados,
-processamento, geração de figuras e compilação de um artigo em LaTeX.
+Projeto desenvolvido no contexto do **Curso de Verão do IAG-USP (2026)**
+com foco em organização, automação e reprodutibilidade de análises
+científicas.
 
-## Estrutura
+Este repositório demonstra um workflow completo e automatizado que
+permite:
 
--   `code/` --- scripts de análise e geração de figuras\
--   `paper/` --- artigo em LaTeX\
--   `figuras/` --- figuras geradas automaticamente (não versionadas)\
--   `resultados/` --- saídas intermediárias (não versionadas)\
--   `dados/` --- dados baixados automaticamente (não versionados)\
--   `fonts/` --- fontes utilizadas no PDF (ver nota abaixo)\
--   `Makefile` --- orquestra o workflow completo
+-   📥 Baixar dados
+-   🧮 Processar e analisar informações
+-   📊 Gerar figuras automaticamente
+-   📝 Compilar um artigo em LaTeX com fonte personalizável
+-   🔁 Garantir reprodutibilidade computacional
 
-## Como reproduzir
+------------------------------------------------------------------------
 
-### Requisitos
+## 🗂 Estrutura do Repositório
 
--   Python 3\
--   GNU Make\
--   Tectonic (LaTeX)
+    .
+    ├── code/              # Scripts de análise em Python
+    ├── paper/             # Documento LaTeX do artigo
+    ├── dados/             # Dados brutos (gerados automaticamente)
+    ├── resultados/        # Resultados intermediários (não versionados)
+    ├── figuras/           # Figuras geradas automaticamente (não versionadas)
+    ├── fonts/             # Fontes locais usadas no PDF (não versionadas)
+    ├── Makefile           # Orquestra todo o workflow
+    ├── environment.yml    # Ambiente reprodutível Conda
+    └── README.md
 
-### Gerar todos os resultados e o PDF final
+------------------------------------------------------------------------
+
+## ⚙️ Requisitos
+
+Recomendado utilizar **Miniforge / Conda**.
+
+Softwares utilizados:
+
+-   🐍 Python 3.11
+-   🧮 NumPy
+-   🐼 Pandas
+-   📈 Matplotlib
+-   🛠 GNU Make
+-   📄 Tectonic (compilador LaTeX)
+
+------------------------------------------------------------------------
+
+## 🧪 Criando o Ambiente Reprodutível
+
+### 1️⃣ Instale o Miniforge (caso ainda não tenha)
+
+👉 https://conda-forge.org/download/
+
+### 2️⃣ Crie o ambiente
+
+``` bash
+conda env create -f environment.yml
+```
+
+### 3️⃣ Ative o ambiente
+
+``` bash
+conda activate curso-verao-iag-2026
+```
+
+------------------------------------------------------------------------
+
+## 🚀 Gerar Todo o Projeto
+
+Após ativar o ambiente:
 
 ``` bash
 make
 ```
 
-### Limpar arquivos gerados
+Isso irá:
+
+-   📥 Baixar os dados
+-   🧮 Executar a análise
+-   📊 Gerar as figuras
+-   📝 Compilar o PDF final
+
+------------------------------------------------------------------------
+
+## 🧹 Limpar Arquivos Gerados
 
 ``` bash
 make clean
 ```
 
-## Fontes
+------------------------------------------------------------------------
+
+## 🖋 Fontes
 
 O artigo utiliza fontes locais via `fontspec`.
 
--   Se a pasta `fonts/` estiver presente, o LaTeX deve encontrar as
-    fontes automaticamente.
--   Caso as fontes não estejam versionadas no repositório, coloque os
-    arquivos `.ttf` na pasta `fonts/` antes de compilar.
+⚠ A fonte **Gilroy** não é versionada no repositório devido a possíveis
+restrições de licença.
 
-## Licença
+Caso deseje utilizá-la:
 
-Código distribuído sob licença MIT.
+1.  Crie uma pasta chamada `fonts/`
+2.  Coloque os arquivos `.ttf` dentro dela
+3.  Recompile o projeto
+
+------------------------------------------------------------------------
+
+## 🔬 Filosofia do Projeto
+
+Este repositório segue princípios de:
+
+-   🌎 Ciência aberta
+-   🔁 Reprodutibilidade científica
+-   🧱 Organização modular
+-   ⚙ Automação de workflows
+-   🗃 Separação clara entre dados, código e resultados
+
+Qualquer pessoa deve conseguir clonar o repositório e reproduzir o
+artigo do zero.
+
+------------------------------------------------------------------------
+
+## 📄 Licença
+
+-   💻 Código: MIT
+-   📝 Conteúdo textual: CC-BY
+
+------------------------------------------------------------------------
+
+## 👤 Autor
+
+Iago Guilherme\
+Instituto de Astronomia, Geofísica e Ciências Atmosféricas (IAG-USP)
+
+## 👥 Informações do Curso
+
+| Função       | Nome |
+|--------------|------|
+| 👨‍🏫 Instrutor | [Leonardo Uieda](https://www.leouieda.com/) |
+| 👨‍🔬 Monitores | [Yago Moreira Castro](https://github.com/YagoMCastro) |
