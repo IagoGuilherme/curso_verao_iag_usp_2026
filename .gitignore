@@ -1,4 +1,26 @@
-# Arquivos LaTeX auxiliares
+# macOS
+.DS_Store
+
+#font
+fonts/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+
+# Dados/resultados gerados pelo pipeline
+dados/
+data/
+resultados/
+figuras/
+paper/variaveis/
+
+# PDFs e arquivos auxiliares do LaTeX
+paper/*.pdf
 *.aux
 *.log
 *.out
@@ -8,23 +30,10 @@
 *.fdb_latexmk
 *.bbl
 *.blg
+*.bcf
+*.run.xml
 
-data/
-
-
-# PDF final (opcional: você pode versionar ou não)
-paper/paper.pdf
-
-# Pastas geradas pelo pipeline
-resultados/
-figuras/
-dados/
-paper/variaveis/
-
-# Python
-__pycache__/
-*.pyc
-
-# Mac
-.DS_Store
-
+# Editor/IDE
+.vscode/
+.idea/
+*.swp

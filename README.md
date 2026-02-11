@@ -1,43 +1,48 @@
-# Curso de Verão IAG-USP 2026 — Projeto Reprodutível
+# Curso de Verão IAG-USP 2026 --- Projeto Reprodutível
 
-Repositório desenvolvido durante o Curso de Verão do IAG-USP (2026) com foco em organização, automação e reprodutibilidade de análises científicas.
-
-Este projeto demonstra como estruturar um artigo científico de forma que todos os resultados — da obtenção dos dados até o PDF final — possam ser gerados automaticamente.
-
----
+Projeto desenvolvido no contexto do Curso de Verão do IAG-USP (2026)
+para demonstrar um workflow reprodutível: download de dados,
+processamento, geração de figuras e compilação de um artigo em LaTeX.
 
 ## Estrutura
 
-code/ Scripts de análise
-dados/ Dados brutos (gerados automaticamente)
-resultados/ Resultados intermediários
-figuras/ Figuras produzidas pelos scripts
-paper/ Documento LaTeX
-fonts/ Fontes utilizadas no artigo
-Makefile Orquestra o workflow completo
+-   `code/` --- scripts de análise e geração de figuras\
+-   `paper/` --- artigo em LaTeX\
+-   `figuras/` --- figuras geradas automaticamente (não versionadas)\
+-   `resultados/` --- saídas intermediárias (não versionadas)\
+-   `dados/` --- dados baixados automaticamente (não versionados)\
+-   `fonts/` --- fontes utilizadas no PDF (ver nota abaixo)\
+-   `Makefile` --- orquestra o workflow completo
 
+## Como reproduzir
 
----
+### Requisitos
 
-## Reproduzir o projeto
+-   Python 3\
+-   GNU Make\
+-   Tectonic (LaTeX)
 
-Requisitos:
+### Gerar todos os resultados e o PDF final
 
-- Python 3
-- Make
-- Tectonic
-- Git
-
-Para gerar todos os resultados e o PDF final:
-
-```bash
+``` bash
 make
-Para remover arquivos gerados:
+```
 
+### Limpar arquivos gerados
+
+``` bash
 make clean
-Dados
-Os dados de temperatura são baixados automaticamente pelo pipeline.
-Eles não são versionados no repositório.
+```
 
-Licença
-Código sob licença MIT.
+## Fontes
+
+O artigo utiliza fontes locais via `fontspec`.
+
+-   Se a pasta `fonts/` estiver presente, o LaTeX deve encontrar as
+    fontes automaticamente.
+-   Caso as fontes não estejam versionadas no repositório, coloque os
+    arquivos `.ttf` na pasta `fonts/` antes de compilar.
+
+## Licença
+
+Código distribuído sob licença MIT.

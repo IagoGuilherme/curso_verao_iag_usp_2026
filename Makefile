@@ -69,6 +69,7 @@ FONTS = \
 # Gera o PDF com o tectonic. Depende do LaTeX, Bibtex, figuras, variáveis e fontes
 paper/paper.pdf: paper/paper.tex paper/referencias.bib figuras/taxas_variacao.png paper/variaveis/n_paises.tex paper/variaveis/paises.tex $(FONTS)
 	tectonic -X compile paper/paper.tex
+	open -a "Foxit PDF Editor" paper/paper.pdf
 
 # Regra para remover todos os arquivos gerados pelo Make.
 clean:
