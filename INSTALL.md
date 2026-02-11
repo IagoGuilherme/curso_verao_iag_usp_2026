@@ -1,93 +1,109 @@
-# Instalando os softwares no seu computador
+# INSTALL.md --- Curso de Verão IAG-USP 2026
 
-Durante o curso, utilizaremos alguns softwares para acessar o `git`, `make`,
-`python` e LaTex:
+## Requisitos (macOS)
 
-* **Git:** O `git` já vem com a maioria dos sistemas Linux. No Windows,
-  utilizaremos o [Git for Windows](https://gitforwindows.org/) que já vem com
-  um terminal com Bash (que é muito melhor que o `cmd.exe`).
-* **Miniforge:** Para acessar o Python, utilizaremos a distribuição
-  [Miniforge](https://conda-forge.org/download/). Ela é melhor que o Anaconda
-  pois vem somente com o Python e o programa `conda` que é utilizado para
-  instalar outros pacotes. Assim, fica mais fácil instalar novos pacotes
-  e atualizá-los sem ter conflitos entre versões, como acontece rotineiramente
-  no Anaconda. O Miniforge também é o jeito mais fácil de instalar o `make`
-  e o compilador de LaTeX `tectonic` no Windows.
-* **Tectonic:** Existem diversos compiladores de LaTeX para as diferentes
-  plataformas. A maioria costuma ser grande e difícil de instalar,
-  principalmente no Windows.
-  O [Tectonic](https://tectonic-typesetting.github.io/en-US/) é um compilador
-  novo de LaTeX que é fácil de instalar pelo Miniforge e mais fácil de rodar
-  que os outros compiladores de LaTeX.
+Este projeto foi desenvolvido e testado em **macOS** utilizando
+Miniforge e Tectonic. Siga os passos abaixo para configurar corretamente
+o ambiente.
 
-**Siga as instruções abaixo para instalá-los corretamente!**
+------------------------------------------------------------------------
 
-## Windows
+## 1. Instalar Xcode Command Line Tools
 
-### 1. Editor de texto
+Abra o Terminal e execute:
 
-Baixe e instale um editor de texto, como
-[VSCode](https://code.visualstudio.com/) ou
-[Notepad++](https://notepad-plus-plus.org/).
-Utilize o que achar melhor. Durante o curso utilizaremos o Notepad++ pois
-é simples e já está instalado nos computadores da sala.
-**Instale o editor de texto primeiro!**
+``` bash
+xcode-select --install
+```
 
-### 2. Git e um terminal
+Isso instala ferramentas básicas como `git` e compiladores necessários.
 
-1. Baixe o [Git for Windows](https://gitforwindows.org/). Ele te dará um
-   terminal com Bash e Git instalados.
-1. Durante a instalação, siga os passos com a configuração padrão **exceto**:
-    1. Na parte "Choosing the default editor used by Git": Selecione o seu
-       editor de texto no menu.
+------------------------------------------------------------------------
 
-       ![](img/git-windows-1.png)
+## 2. Instalar Miniforge
 
-    1. Na parte "Adjusting the name of the initial branch in new repositories":
-       Selecione "Override the default branch name for new repositories"
+Baixe a versão correta para seu processador:
 
-       ![](img/git-windows-2.png)
+👉 https://conda-forge.org/download/
 
-    1. Na parte "Configuring the terminal emulator to use with Git Bash":
-       Selecione "Use Windows' default console window"
+Ou via terminal (Apple Silicon):
 
-       ![](img/git-windows-3.png)
+``` bash
+curl -L -O https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-arm64.sh
+bash Miniforge3-MacOSX-arm64.sh
+```
 
-Ao final, você terá acesso ao programa "Git Bash" que te fornecerá um terminal
-com a linguagem Bash e o programa Git instalado.
+(Use `x86_64.sh` se seu Mac for Intel.)
 
-### 3. Miniforge
+Após a instalação, feche e reabra o terminal.
 
-1. Baixe o [Miniforge](https://conda-forge.org/download/) para Windows.
-1. Durante a instalação, siga os passos com a configuração padrão **exceto**:
-    1. Na parte "Advanced installation options": Selecione "Add Miniforge3 to
-       my PATH environment variable".
+------------------------------------------------------------------------
 
-       ![](img/miniforge-1.png)
+## 3. Criar ambiente virtual
 
-Ao final, você poderá usar os comandos `python` e `conda` no terminal do Git
-Bash.
+``` bash
+conda create -n curso-verao python=3.11
+conda activate curso-verao
+```
 
-### 4. Make, Tectonic e outros
+------------------------------------------------------------------------
 
-1. Abra o Git Bash.
-1. Digite `conda install -y make tectonic numpy pandas matplotlib` e aperte
-   *Enter*.
-   Isso deve baixar e instalar o programa `make`, o Tectonic e as bibliotecas
-   de Python que iremos utilizar.
+## 4. Instalar dependências
 
-## Linux
+``` bash
+conda install -y make tectonic numpy pandas matplotlib geopandas
+```
 
-Na maioria dos sistemas Linux você já terá um terminal com Bash, `make` e o Git
-instalados. Caso seja necessário, instale um editor de texto também, embora
-a maioria das distribuições já venha com um.
+Isso instala:
 
-1. Baixe e instale o [Miniforge](https://github.com/conda-forge/miniforge). Ele
-   te dará o Python e o gerenciador de software `conda` que utilizaremos para
-   instalar o LaTeX. Siga os passos do instalador para colocar as coisas no seu
-   `PATH`.
-1. Rode o comando `conda install -y tectonic numpy pandas matplotlib` no
-   terminal após instalar o Miniforge.
-   Isso deve baixar e instalar o Tectonic e as bibliotecas de Python que iremos
-   utilizar.
+-   GNU Make\
+-   Tectonic (LaTeX moderno)\
+-   NumPy\
+-   Pandas\
+-   Matplotlib\
+-   GeoPandas
 
+------------------------------------------------------------------------
+
+## 5. Testar instalação
+
+``` bash
+git --version
+make --version
+python --version
+tectonic --version
+```
+
+------------------------------------------------------------------------
+
+## 6. Rodar o projeto
+
+Depois de clonar o repositório:
+
+``` bash
+make
+make view
+```
+
+O pipeline irá:
+
+1.  Baixar os dados
+2.  Gerar resultados
+3.  Criar figuras
+4.  Compilar o PDF
+5.  Abrir o artigo
+
+------------------------------------------------------------------------
+
+## Observações
+
+-   Não é necessário instalar MacTeX.
+-   Sempre ative o ambiente antes de rodar o projeto:
+
+``` bash
+conda activate curso-verao
+```
+
+------------------------------------------------------------------------
+
+Projeto desenvolvido no contexto do Curso de Verão IAG-USP 2026.
