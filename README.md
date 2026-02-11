@@ -98,14 +98,6 @@ make
 make view
 ```
 
----
-
-
-
-> Se você preferir um GIF animado “de verdade” (ex.: legenda mudando, zoom, etc.), dá para gerar via Python/Matplotlib também.
-
----
-
 ## 🧰 Tecnologias usadas
 
 - 🐍 Python 3.11  
@@ -128,7 +120,6 @@ Instituto de Astronomia, Geofísica e Ciências Atmosféricas — Universidade d
 
 ---
 
-## 📌 DOI (Zenodo)
 
 ## 📖 How to Cite
 
@@ -146,7 +137,7 @@ Guilherme, I. (2026). *Curso de Verão IAG-USP 2026 — Reproducible Scientific 
 
 ---
 
-# 🇬🇧 English
+# English
 
 <p align="center">
   <img alt="Python" src="https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white">
