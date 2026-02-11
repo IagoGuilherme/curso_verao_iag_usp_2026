@@ -1,0 +1,30 @@
+# Arquivos LaTeX auxiliares
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+*.bbl
+*.blg
+
+data/
+
+
+# PDF final (opcional: você pode versionar ou não)
+paper/paper.pdf
+
+# Pastas geradas pelo pipeline
+resultados/
+figuras/
+dados/
+paper/variaveis/
+
+# Python
+__pycache__/
+*.pyc
+
+# Mac
+.DS_Store
+
