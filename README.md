@@ -49,9 +49,6 @@ Makefile              → orquestra todo o workflow
 INSTALL.md            → instalação (macOS)
 ```
 
-> 💡 Recomendação: **versione** apenas imagens do README em `assets/` (ex.: `assets/mapa_variacao.png` e `assets/mapa_variacao.gif`).  
-> As figuras geradas pelo pipeline (`figuras/`) podem continuar fora do Git (via `.gitignore`).
-
 ---
 
 ## 🔁 Diagrama do workflow (reprodutibilidade)
