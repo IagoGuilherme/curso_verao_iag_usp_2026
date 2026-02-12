@@ -1,59 +1,68 @@
+% \documentclass[twocolumn,A4]{article}
+
+% % Fontes (XeLaTeX/LuaLaTeX/Tectonic)
+% %\usepackage{fontspec}
+% % Se paper.tex está em paper/ e fonts/ na raiz do repo:
+% %\setmainfont[
+% %  Path = ../fonts/,
+% %  Extension = .ttf,
+% %  UprightFont = Gilroy-Light,
+% %  BoldFont = Gilroy-Bold,
+% %  ItalicFont = Gilroy-MediumItalic,
+% %  BoldItalicFont = Gilroy-BoldItalic
+% %]{Gilroy}
+
+
 \documentclass[twocolumn,A4]{article}
 
-% Fontes (XeLaTeX/LuaLaTeX/Tectonic)
-%\usepackage{fontspec}
-% Se paper.tex está em paper/ e fonts/ na raiz do repo:
-%\setmainfont[
-%  Path = ../fonts/,
-%  Extension = .ttf,
-%  UprightFont = Gilroy-Light,
-%  BoldFont = Gilroy-Bold,
-%  ItalicFont = Gilroy-MediumItalic,
-%  BoldItalicFont = Gilroy-BoldItalic
-%]{Gilroy}
+% --- Fontes e Tipografia ---
+\usepackage{tgpagella} % Fonte baseada na Palatino, excelente para corpo de texto
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype} % Melhora o espaçamento entre letras e palavras
 
-\usepackage{tgpagella}
-\usepackage{microtype}
-
-
+% --- Idioma e Matemática ---
 \usepackage[brazil]{babel}
 \usepackage{amsmath}
 \usepackage{amssymb}
+
+% --- Elementos Gráficos ---
 \usepackage{graphicx}
-\usepackage{microtype}
-\usepackage{placeins}
+\usepackage{placeins} % Para o comando \FloatBarrier
+\usepackage{xcolor}
 
+% --- Caminho das Figuras ---
+% Como o paper.tex está em paper/ e as figuras em figuras/ (raiz), 
+% o caminho relativo ../figuras/ é necessário.
+\graphicspath{{../figuras/}}
 
+% --- Layout de Página (Fancyhdr) ---
 \usepackage{fancyhdr}
 \usepackage{lastpage}
 
 \pagestyle{fancy}
 \fancyhf{}
-
-% Aumenta o espaço reservado para rodapé
 \setlength{\footskip}{30pt}
 
-% Rodapé pequeno e multilinha à esquerda
+% Rodapé configurado com informações do workflow
 \fancyfoot[L]{%
-\scriptsize
-Fonte dos dados: Berkeley Earth (CC-BY-NC).
-Processamento: Python + NumPy + Pandas.
-Workflow: GNU Make + Tectonic.
-IAG-USP (2026).
+  \scriptsize
+  Fonte dos dados: Berkeley Earth (CC-BY-NC).\\
+  Processamento: Python + NumPy + Pandas.\\
+  Workflow: GNU Make + Tectonic. IAG-USP (2026).
 }
 
-% Numeração pequena à direita
+% Numeração de páginas formatada como "Página X de Y"
 \fancyfoot[R]{\scriptsize \thepage/\pageref{LastPage}}
 
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0.3pt}
 
-
-
-% Citações
+% --- Citações Bibliográficas ---
+% Configurado para usar o estilo Autor-Data (Ex: Osman et al., 2021)
 \usepackage[round,authoryear,sort]{natbib}
 
-% Hyperlinks (carregar por último para evitar conflitos e garantir links em citações)
+% --- Hyperlinks (Carregado por último) ---
 \usepackage{hyperref}
 \hypersetup{
   colorlinks=true,
@@ -63,13 +72,12 @@ IAG-USP (2026).
   pdfauthor={Iago Guilherme}
 }
 
-% Variáveis geradas pelo código
+% --- Variáveis externas (Geradas pelos scripts Python/Shell) ---
+% Certifique-se de que esses arquivos existem em paper/variaveis/
 \input{variaveis/n_paises.tex}
 \input{variaveis/paises_extremos.tex}
 
-
-
-
+% --- Início do Documento ---
 \begin{document}
 
 \title{Mudança na temperatura média de países nos últimos cinco anos}
@@ -85,18 +93,20 @@ IAG-USP (2026).
 }
 
 \date{\today}
+
 \maketitle
 
 \begin{abstract}
 \textbf{Mini Abstract (English).}
-This study analyzes recent variations in mean monthly surface temperature for \NPaises{} countries.
-A linear model is fitted to the last five years of observations to estimate the annual temperature change rate for each country.
-The results highlight regional differences in recent trends and enable quantitative comparisons among countries.
+This study analyzes recent variations in mean monthly surface temperature for \NPaises{} countries. 
+A linear model is fitted to the last five years of observations to estimate the annual temperature change rate for each country. 
+The results highlight regional differences in recent trends and enable quantitative comparisons among countries. 
+O workflow adotado garante a reprodutibilidade dos resultados através de automação via Makefile e Tectonic.
 \end{abstract}
 
 \section{Introdução}
 
-A variabilidade da temperatura média global constitui um dos principais indicadores das mudanças climáticas em curso. Registros paleoclimáticos e instrumentais indicam que a temperatura média da Terra tem apresentado tendência de aumento ao longo do Holoceno, com intensificação nas últimas décadas \citep{Osman2021}. Entretanto, apesar da tendência global de aquecimento, a distribuição espacial dessas variações não é uniforme, refletindo a influência combinada de forçantes radiativas, variabilidade atmosférica regional e processos oceânicos.
+A variabilidade da temperatura média global constitui um dos principais indicadores das mudanças climáticas em curso. Registros paleoclimáticos e instrumentais indicam que a temperatura média da Terra tem apresentado tendência de aumento ao longo do Holoceno, com intensificação nas últimas décadas \citep{osman2021globally}. Entretanto, apesar da tendência global de aquecimento, a distribuição espacial dessas variações não é uniforme, refletindo a influência combinada de forçantes radiativas, variabilidade atmosférica regional e processos oceânicos.
 
 Análises em escala nacional permitem identificar padrões regionais e contrastes espaciais relevantes. Embora estudos de longo prazo sejam fundamentais para compreender tendências climáticas estruturais, investigações em janelas temporais mais curtas — como os últimos cinco anos — podem revelar variações recentes associadas a eventos extremos, oscilações climáticas e padrões atmosféricos transientes.
 
@@ -104,7 +114,7 @@ Neste trabalho, investigamos a variação recente da temperatura média mensal e
 
 \section{Metodologia}
 
-Seja a taxa de variação da temperatura $\alpha$, medida em graus Celsius por ano. Assumimos que, em escala temporal recente, a evolução da temperatura média $T$ pode ser aproximada por um modelo linear em função do tempo $t$:
+Seja a taxa de variação da temperatura $\alpha$, medida em graus Celsius por ano ($^\circ$C/ano). Assumimos que, em escala temporal recente, a evolução da temperatura média $T$ pode ser aproximada por um modelo linear em função do tempo $t$:
 
 \begin{equation}
   T(t) = t\alpha + \beta
@@ -112,7 +122,7 @@ Seja a taxa de variação da temperatura $\alpha$, medida em graus Celsius por a
 \end{equation}
 
 \noindent
-em que $\beta$ representa o coeficiente linear do modelo. A equação \ref{eq:linear} foi ajustada às séries temporais correspondentes aos últimos cinco anos para cada país, permitindo a estimativa da taxa de variação $\alpha$.
+em que $\beta$ representa o coeficiente linear do modelo. A equação \ref{eq:linear} foi ajustada às séries temporais correspondentes aos últimos cinco anos para cada país através do método de mínimos quadrados, permitindo a estimativa robusta da taxa de variação $\alpha$.
 
 \section{Resultados}
 
@@ -122,46 +132,38 @@ Os resultados revelam uma heterogeneidade significativa no aquecimento global re
 
 De forma quantitativa, os maiores valores estimados para $\alpha$ concentram-se em \PaisesMaiores{}. Em contrapartida, as menores taxas de variação — ou tendências de estabilidade relativa — foram observadas em \PaisesMenores{}. A comparação direta entre os valores extremos de variação térmica pode ser visualizada na Figura~\ref{fig:variacao}, que destaca o contraste entre os países com maior e menor ritmo de mudança de temperatura no período analisado.
 
-% Figura 1: barras (mantém no fluxo)
 \begin{figure}[htb]
   \centering
-  \includegraphics[width=\linewidth]{../figuras/taxas_variacao.png}
-  \caption{Cinco maiores e menores taxas de variação no conjunto de dados analisado.}
+  \includegraphics[width=\linewidth]{taxas_variacao.png}
+  \caption{Os cinco países com as maiores e menores taxas de variação no conjunto de dados analisado durante o período de cinco anos.}
   \label{fig:variacao}
 \end{figure}
 
-A Figura~\ref{fig:variacao} apresenta os cinco países com maiores taxas positivas e os cinco com menores taxas no período considerado.
+A Figura~\ref{fig:variacao} apresenta graficamente os países que se destacaram nos extremos da distribuição. Nota-se que a magnitude do aquecimento nos países do topo é superior à tendência de resfriamento ou estabilidade nos países da base.
 
-% Figura 2: mapa ocupando ~metade da página na vertical (altura controlada)
-% "height=0.5\textheight" força a imagem a ocupar metade da altura do texto.
-% "keepaspectratio" evita distorção.
 \begin{figure*}[t]
   \centering
-  \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{../figuras/mapa_variacao.png}
-  \caption{Mapa mundial da taxa de variação de temperatura (°C/ano) estimada para os últimos cinco anos. Países sem dados ou sem correspondência no mapa estão em cinza.}
+  \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{mapa_variacao.png}
+  \caption{Mapa mundial da taxa de variação de temperatura ($^\circ$C/ano) estimada para os últimos cinco anos. Países sem dados disponíveis ou sem correspondência cartográfica estão representados em cinza.}
   \label{fig:mapa_variacao}
 \end{figure*}
 
 \FloatBarrier
 
-
-
 \section{Conclusões}
 
-A análise realizada para \NPaises{} países indica predominância de tendências positivas na variação recente da temperatura média. A maior taxa estimada foi de \MaiorTaxa~°C/ano, enquanto a menor atingiu \MenorTaxa~°C/ano. A média global das taxas estimadas foi de aproximadamente \MediaTaxa~°C/ano.
+A análise realizada para \NPaises{} países indica predominância de tendências positivas na variação recente da temperatura média. A maior taxa estimada foi de \MaiorTaxa~$^\circ$C/ano, enquanto a menor atingiu \MenorTaxa~$^\circ$C/ano. A média global das taxas estimadas para este conjunto foi de aproximadamente \MediaTaxa~$^\circ$C/ano.
 
-A distribuição espacial das estimativas revela heterogeneidade regional significativa. Embora o sinal médio global seja predominantemente positivo, indicando aquecimento recente em grande parte dos países analisados, observam-se também tendências negativas em determinadas regiões, possivelmente associadas à variabilidade climática interanual.
+A distribuição espacial das estimativas (Figura~\ref{fig:mapa_variacao}) revela heterogeneidade regional significativa. Embora o sinal médio global seja predominantemente positivo, indicando aquecimento recente em grande parte dos países analisados, observam-se também tendências negativas em determinadas regiões, possivelmente associadas à variabilidade climática interanual ou fenômenos como o El Niño/La Niña.
 
-Cabe ressaltar que o período analisado — correspondente aos últimos cinco anos — representa uma janela temporal relativamente curta para inferências climáticas estruturais. Ainda assim, as estimativas obtidas evidenciam que variações recentes podem apresentar magnitudes relevantes em escala anual.
-
-O workflow adotado, que integra aquisição automática de dados, processamento, geração de figuras e compilação do artigo, assegura reprodutibilidade computacional e permite a atualização imediata dos resultados com a incorporação de novos dados.
-
+Cabe ressaltar que o período analisado representa uma janela temporal relativamente curta para inferências climáticas estruturais de longo prazo. Ainda assim, as estimativas obtidas evidenciam que variações recentes podem apresentar magnitudes relevantes em escala anual. O workflow adotado assegura total reprodutibilidade computacional, permitindo a atualização imediata dos resultados conforme novos dados sejam publicados.
 
 \newpage
 \section*{Agradecimentos}
 
-Este trabalho foi desenvolvido no contexto do Curso de Verão do IAG-USP (2026), sob orientação do Prof. \href{https://www.leouieda.com/}{Leonardo Uieda} (\href{https://github.com/leouieda}{GitHub}), com apoio dos monitores \href{https://github.com/arthursmacedo}{Arthur Siqueira de Macêdo} e \href{https://github.com/YagoMCastro}{Yago Moreira Castro}.
+Este trabalho foi desenvolvido no contexto do Curso de Verão do IAG-USP (2026), sob orientação do Prof. \href{https://www.leouieda.com/}{Leonardo Uieda} (\href{https://github.com/leouieda}{GitHub}), com apoio fundamental dos monitores \href{https://github.com/arthursmacedo}{Arthur Siqueira de Macêdo} e \href{https://github.com/YagoMCastro}{Yago Moreira Castro}.
 
+% --- Bibliografia ---
 \bibliographystyle{plainnat}
 \bibliography{referencias}
 
