@@ -179,3 +179,220 @@ Guilherme, I. (2026). *Curso de Verão IAG-USP 2026 — Reproducible Scientific 
 ## License
 
 MIT (code). You may optionally use CC-BY for text.
+
+
+# 🍽️ Workflow v2.0 --- Explicação para Iniciantes (Analogias de Cozinha)
+
+Para explicar esse fluxo de forma simples, vamos usar uma analogia de
+**Cozinha Profissional**.
+
+Se você é um "noob" no mundo do Python, imagine que:
+
+-   💻 Seu computador é o **prédio**
+-   📂 Seu projeto é um **jantar de gala**
+-   🎯 O objetivo é que ele saia **perfeito e idêntico toda vez**
+
+Aqui está o workflow v2.0 explicado passo a passo.
+
+------------------------------------------------------------------------
+
+## 1️⃣ Miniforge --- A Fundação da Cozinha
+
+Antes de cozinhar, você precisa de uma cozinha equipada.
+
+### O que ele é
+
+O **Miniforge** é o instalador que coloca as ferramentas básicas no seu
+Mac.
+
+### Comparação com Anaconda
+
+-   **Anaconda** = um buffet gigantesco com 500 pratos prontos\
+    (ocupa muito espaço e vem com coisas que você nunca vai usar)
+-   **Miniforge** = uma cozinha de chef\
+    (minimalista, leve e focada no que realmente importa --- usando o
+    canal `conda-forge`)
+
+### Por que usar?
+
+Em Macs modernos, o Miniforge: - É mais rápido - Dá menos erro de
+conflito de bibliotecas - É mais limpo e controlado
+
+------------------------------------------------------------------------
+
+## 2️⃣ Conda --- O Chef de Cozinha
+
+Agora que você tem a cozinha, precisa de alguém para gerenciar tudo.
+
+### O que ele faz
+
+O **Conda** lê o arquivo `environment.yml` e entende exatamente o que
+precisa ser instalado.
+
+### Comparação com Pip
+
+-   **Pip** = entregador que traz apenas ingredientes de Python\
+-   **Conda** = chef experiente que sabe:
+    -   Instalar pacotes Python
+    -   Instalar bibliotecas de sistema (C++, GeoTIFF)
+    -   Instalar ferramentas como LaTeX ou Tectonic
+
+Se sua receita envolve mapas complexos ou geração de PDF científico, o
+Conda resolve tudo sozinho.
+
+------------------------------------------------------------------------
+
+## 3️⃣ environment.yml --- A Receita Oficial
+
+Esse arquivo é o segredo da **reprodutibilidade**.
+
+### O que ele faz
+
+Lista: - Versão exata do Python - Versões exatas de cada biblioteca
+(Pandas, GeoPandas, etc.) - Ferramentas externas como Tectonic
+
+### Por que isso é importante?
+
+Se você enviar apenas seu código para alguém: - Pode não funcionar -
+Pode quebrar por causa de versões diferentes
+
+Com o `environment.yml`, você está entregando a **receita exata**.
+
+O resultado será o mesmo: - No seu Mac - No IAG-USP - Em Harvard - Daqui
+a 2 anos
+
+------------------------------------------------------------------------
+
+## 4️⃣ O Ambiente (ex: `curso-verao`) --- A Bancada Isolada
+
+Você não quer misturar a farinha do bolo com o sal da carne.
+
+Quando você roda:
+
+``` bash
+conda activate curso-verao
+```
+
+Você entra em uma "caixa isolada".
+
+### O que isso significa?
+
+-   Apenas as versões definidas naquela receita existem ali dentro
+-   Atualizações de outros projetos não quebram seu artigo
+-   Seu ambiente fica controlado e seguro
+
+------------------------------------------------------------------------
+
+## 5️⃣ Makefile --- O Livro de Ordens
+
+O Makefile é quem realmente automatiza o trabalho.
+
+### O que ele faz?
+
+Ele diz:
+
+> "Use o Python desse ambiente, gere os mapas, e depois use o Tectonic
+> para montar o PDF."
+
+### A grande vantagem
+
+Em vez de digitar 10 comandos no terminal, você digita:
+
+``` bash
+make
+```
+
+E ele: - Executa os scripts - Atualiza figuras se os dados mudarem -
+Gera o PDF final - Faz tudo na ordem certa
+
+Sem erro humano.
+
+------------------------------------------------------------------------
+
+# 📊 Resumo Comparativo
+
+  --------------------------------------------------------------------------
+  Ferramenta            Analogia         Por que não a outra?
+  --------------------- ---------------- -----------------------------------
+  **Miniforge**         A Cozinha        Melhor que Anaconda por ser leve e
+                                         rápida no Mac
+
+  **Conda**             O Chef           Melhor que Pip por gerenciar mapas,
+                                         C++, LaTeX
+
+  **environment.yml**   A Receita        Garante que o projeto não
+                                         "estrague" no futuro
+
+  **Makefile**          O Gerente        Automatiza tudo e evita erro humano
+  --------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+
+# 🚀 O Toque Final da v2.0
+
+O **Tectonic** (motor de PDF) está dentro da lista de dependências do
+Conda.
+
+Isso é poderoso.
+
+Significa que: - Seu projeto não depende de LaTeX instalado na máquina -
+Ele traz o próprio "escritor de PDF" dentro do ambiente - Ele é portátil
+e totalmente reproduzível
+
+É um workflow de nível profissional.
+
+------------------------------------------------------------------------
+
+# ▶️ Como Rodar o Projeto
+
+## 1️⃣ Instale o Miniforge (uma vez só)
+
+Baixe e instale a versão para seu sistema.
+
+------------------------------------------------------------------------
+
+## 2️⃣ Crie o ambiente
+
+Dentro da pasta do projeto:
+
+``` bash
+conda env create -f environment.yml
+```
+
+------------------------------------------------------------------------
+
+## 3️⃣ Ative o ambiente
+
+``` bash
+conda activate curso-verao
+```
+
+------------------------------------------------------------------------
+
+## 4️⃣ Gere tudo automaticamente
+
+``` bash
+make
+```
+
+Pronto.
+
+-   Mapas serão gerados
+-   Figuras atualizadas
+-   PDF compilado
+-   Tudo reproduzível
+
+------------------------------------------------------------------------
+
+# 🎯 Filosofia do Workflow
+
+Esse projeto foi estruturado para ser:
+
+-   ✅ Reproduzível
+-   ✅ Portátil
+-   ✅ Automatizado
+-   ✅ Cientificamente robusto
+-   ✅ Seguro contra conflitos de versão
+
+É como ter uma cozinha profissional portátil dentro do seu computador.
+
