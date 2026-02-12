@@ -4,7 +4,6 @@
 #font
 fonts/
 img/
-dados/
 data/
 resultados/
 figuras/
@@ -31,7 +30,6 @@ __pycache__/
 venv/
 
 # Dados/resultados gerados pelo pipeline
-dados/
 data/
 resultados/
 figuras/

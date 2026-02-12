@@ -13,14 +13,20 @@ Berkeley Earth (https://berkeleyearth.org/).
 Utiliza a biblioteca Pooch (https://www.fatiando.org/pooch) para baixar os
 dados.
 """
-import pooch
 
 
 # A URL e o hash MD5 foram copiados do repositório de dados
+import logging
+import pooch
+
+# Silencia as mensagens de log (INFO) do pooch
+pooch.get_logger().setLevel(logging.WARNING)
+
 p = pooch.retrieve(
     url="https://github.com/compgeolab/temperature-data/releases/download/2025-02-11/temperature-data.zip",
     known_hash="md5:d102212049af1695b686c94ae1eea233",
     processor=pooch.Unzip(extract_dir="temperatura"),
     fname="temperature-data.zip",
     path="data",
+    progressbar=False,
 )

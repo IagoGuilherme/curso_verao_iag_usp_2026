@@ -4,7 +4,7 @@ import geopandas as gpd
 import matplotlib.pyplot as plt
 
 CSV_PATH = "resultados/variacao_temperatura.csv"
-WORLD_GEOJSON = "dados/base/world.geojson"
+WORLD_GEOJSON = "data/base/world.geojson"
 OUT_PATH = "figuras/mapa_variacao.png"
 
 
@@ -47,7 +47,7 @@ def load_world(path: str) -> gpd.GeoDataFrame:
     if not os.path.exists(path):
         raise FileNotFoundError(
             f"Arquivo do mapa não encontrado: {path}\n"
-            "Baixe e coloque o GeoJSON em dados/base/world.geojson (ver Makefile/README)."
+            "Baixe e coloque o GeoJSON em data/base/world.geojson (ver Makefile/README)."
         )
     world = gpd.read_file(path)
 
